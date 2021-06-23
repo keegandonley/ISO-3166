@@ -55,5 +55,15 @@ const path = require('path');
         fs.writeFileSync(path.join(__dirname, 'countryCodeToName.json'), JSON.stringify(countryCodeToName, null, 2)),
         fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha2.json'), JSON.stringify(countryCodeToAlpha2, null, 2)),
         fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha3.json'), JSON.stringify(countryCodeToAlpha3, null, 2)),
+
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToAlpha3.min.json'), JSON.stringify(alpha2ToAlpha3)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToAlpha2.min.json'), JSON.stringify(alpha3ToAlpha2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToCountryCode.min.json'), JSON.stringify(alpha2ToCountryCode)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToCountryCode.min.json'), JSON.stringify(alpha3ToCountryCode)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToName.min.json'), JSON.stringify(alpha2ToName)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToName.min.json'), JSON.stringify(alpha3ToName)),
+        fs.writeFileSync(path.join(__dirname, 'countryCodeToName.min.json'), JSON.stringify(countryCodeToName)),
+        fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha2.min.json'), JSON.stringify(countryCodeToAlpha2)),
+        fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha3.min.json'), JSON.stringify(countryCodeToAlpha3)),
     ])
 })();
