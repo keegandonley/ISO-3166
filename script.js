@@ -15,12 +15,33 @@ const path = require('path');
     const countryCodeToName = {};
     const countryCodeToAlpha2 = {};
     const countryCodeToAlpha3 = {};
+    const alpha3ToRegionName = {};
+    const alpha3ToRegionCode = {};
+    const alpha2ToRegionCode = {};
+    const alpha2ToRegionName = {};
+    const regionCodeToRegionName = {};
 
     parsed.forEach((country) => {
         const a2 = country['alpha-2'];
         const a3 = country['alpha-3'];
         const code = country['country-code'];
         const name = country.name;
+        const regionName = country.region;
+        const regionCode = country['region-code'];
+
+        if (a2 && regionName && regionCode) {
+            alpha2ToRegionName[a2] = regionName;
+            alpha2ToRegionCode[a2] = regionCode;
+        }
+
+        if (a3 && regionName && regionCode) {
+            alpha3ToRegionName[a3] = regionName;
+            alpha3ToRegionCode[a3] = regionCode;
+        }
+
+        if (regionCode && regionName) {
+            regionCodeToRegionName[regionCode] = regionName;
+        }
 
         if (a2 && a3) {
             alpha2ToAlpha3[a2] = a3;
@@ -55,6 +76,12 @@ const path = require('path');
         fs.writeFileSync(path.join(__dirname, 'countryCodeToName.json'), JSON.stringify(countryCodeToName, null, 2)),
         fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha2.json'), JSON.stringify(countryCodeToAlpha2, null, 2)),
         fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha3.json'), JSON.stringify(countryCodeToAlpha3, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToRegionName.json'), JSON.stringify(alpha3ToRegionName, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToRegionCode.json'), JSON.stringify(alpha3ToRegionCode, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionName.json'), JSON.stringify(alpha2ToRegionName, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionCode.json'), JSON.stringify(alpha2ToRegionCode, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'regionCodeToRegionName.json'), JSON.stringify(regionCodeToRegionName, null, 2)),
+
 
         fs.writeFileSync(path.join(__dirname, 'alpha2ToAlpha3.min.json'), JSON.stringify(alpha2ToAlpha3)),
         fs.writeFileSync(path.join(__dirname, 'alpha3ToAlpha2.min.json'), JSON.stringify(alpha3ToAlpha2)),
@@ -65,5 +92,10 @@ const path = require('path');
         fs.writeFileSync(path.join(__dirname, 'countryCodeToName.min.json'), JSON.stringify(countryCodeToName)),
         fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha2.min.json'), JSON.stringify(countryCodeToAlpha2)),
         fs.writeFileSync(path.join(__dirname, 'countryCodeToAlpha3.min.json'), JSON.stringify(countryCodeToAlpha3)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToRegionName.min.json'), JSON.stringify(alpha3ToRegionName)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToRegionCode.min.json'), JSON.stringify(alpha3ToRegionCode)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionName.min.json'), JSON.stringify(alpha2ToRegionName)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionCode.min.json'), JSON.stringify(alpha2ToRegionCode)),
+        fs.writeFileSync(path.join(__dirname, 'regionCodeToRegionName.min.json'), JSON.stringify(regionCodeToRegionName)),
     ])
 })();
