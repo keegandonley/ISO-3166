@@ -20,6 +20,12 @@ const path = require('path');
     const alpha2ToRegionCode = {};
     const alpha2ToRegionName = {};
     const regionCodeToRegionName = {};
+    const alpha3ToSubRegionCode = {};
+    const alpha2ToSubRegionCode = {};
+    const alpha3ToSubRegionName = {};
+    const alpha2ToSubRegionName = {};
+    const subRegionCodeToName = {};
+    const subRegionCodeToRegionCode = {};
 
     parsed.forEach((country) => {
         const a2 = country['alpha-2'];
@@ -28,6 +34,26 @@ const path = require('path');
         const name = country.name;
         const regionName = country.region;
         const regionCode = country['region-code'];
+        const subRegionName = country['sub-region'];
+        const subRegionCode = country['sub-region-code'];
+
+        if (a3 && subRegionCode && subRegionName) {
+            alpha3ToSubRegionCode[a3] = subRegionCode;
+            alpha3ToSubRegionName[a3] = subRegionName;
+        }
+
+        if (a2 && subRegionCode && subRegionName) {
+            alpha2ToSubRegionCode[a2] = subRegionCode;
+            alpha2ToSubRegionName[a2] = subRegionName;
+        }
+
+        if (subRegionCode && subRegionName) {
+            subRegionCodeToName[subRegionCode] = subRegionName;
+        }
+
+        if (subRegionCode && regionCode) {
+            subRegionCodeToRegionCode[subRegionCode] = regionCode;
+        }
 
         if (a2 && regionName && regionCode) {
             alpha2ToRegionName[a2] = regionName;
@@ -81,6 +107,12 @@ const path = require('path');
         fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionName.json'), JSON.stringify(alpha2ToRegionName, null, 2)),
         fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionCode.json'), JSON.stringify(alpha2ToRegionCode, null, 2)),
         fs.writeFileSync(path.join(__dirname, 'regionCodeToRegionName.json'), JSON.stringify(regionCodeToRegionName, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToSubRegionCode.json'), JSON.stringify(alpha3ToSubRegionCode, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToSubRegionCode.json'), JSON.stringify(alpha2ToSubRegionCode, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToSubRegionName.json'), JSON.stringify(alpha3ToSubRegionName, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToSubRegionName.json'), JSON.stringify(alpha2ToSubRegionName, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'subRegionCodeToName.json'), JSON.stringify(subRegionCodeToName, null, 2)),
+        fs.writeFileSync(path.join(__dirname, 'subRegionCodeToRegionCode.json'), JSON.stringify(subRegionCodeToRegionCode, null, 2)),
 
 
         fs.writeFileSync(path.join(__dirname, 'alpha2ToAlpha3.min.json'), JSON.stringify(alpha2ToAlpha3)),
@@ -97,5 +129,11 @@ const path = require('path');
         fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionName.min.json'), JSON.stringify(alpha2ToRegionName)),
         fs.writeFileSync(path.join(__dirname, 'alpha2ToRegionCode.min.json'), JSON.stringify(alpha2ToRegionCode)),
         fs.writeFileSync(path.join(__dirname, 'regionCodeToRegionName.min.json'), JSON.stringify(regionCodeToRegionName)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToSubRegionCode.min.json'), JSON.stringify(alpha3ToSubRegionCode)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToSubRegionCode.min.json'), JSON.stringify(alpha2ToSubRegionCode)),
+        fs.writeFileSync(path.join(__dirname, 'alpha3ToSubRegionName.min.json'), JSON.stringify(alpha3ToSubRegionName)),
+        fs.writeFileSync(path.join(__dirname, 'alpha2ToSubRegionName.min.json'), JSON.stringify(alpha2ToSubRegionName)),
+        fs.writeFileSync(path.join(__dirname, 'subRegionCodeToName.min.json'), JSON.stringify(subRegionCodeToName)),
+        fs.writeFileSync(path.join(__dirname, 'subRegionCodeToRegionCode.min.json'), JSON.stringify(subRegionCodeToRegionCode)),
     ])
 })();
